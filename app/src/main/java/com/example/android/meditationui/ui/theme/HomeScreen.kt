@@ -41,7 +41,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.android.meditationui.R
+import com.example.android.meditationui.data.BottomMenuContent
 import com.example.android.meditationui.data.Feature
+import com.example.android.meditationui.data.MeditationUiObjects.bottomMenuItems
 import com.example.android.meditationui.data.MeditationUiObjects.chips
 import com.example.android.meditationui.data.MeditationUiObjects.features
 import com.example.android.meditationui.standardQuadFromTo
@@ -58,6 +60,7 @@ fun HomeScreen() {
             CurrentMeditation()
             FeatureSection(feature = features)
         }
+        BottomMenu(items = bottomMenuItems, modifier = Modifier.align(Alignment.BottomCenter))
     }
 
 }
@@ -274,6 +277,73 @@ fun FeatureItem(feature: Feature) {
     }
 }
 
+@Composable
+fun BottomMenu(
+    items: List<BottomMenuContent>,
+    modifier: Modifier = Modifier,
+    activeHighlightColor: Color = ButtonBlue,
+    activeTextColor: Color = Color.White,
+    inactiveTextColor: Color = AquaBlue,
+    initialSelectedItemIndex: Int = 0
+) {
+       var selectedItemIndex by remember {
+           mutableStateOf(initialSelectedItemIndex)
+       }
+    Row(
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+            .fillMaxWidth()
+            .background(DeepBlue)
+            .padding(vertical = 16.dp)
+    ) {
+        items.forEachIndexed { index, item ->
+            BottomMenuItem(
+                item = item,
+                isSelected = index == selectedItemIndex,
+                activeTextColor = activeTextColor,
+                inactiveTextColor = inactiveTextColor,
+                activeHighlightColor = activeHighlightColor
+            ) {
+                    selectedItemIndex = index
+            }
+        }
+    }
+}
+
+@Composable
+fun BottomMenuItem(
+    item:BottomMenuContent,
+    isSelected: Boolean = false,
+    activeHighlightColor: Color = ButtonBlue,
+    activeTextColor: Color = Color.White,
+    inactiveTextColor: Color = AquaBlue,
+    onItemClick: () -> Unit
+){
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .clickable { onItemClick() }) {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(if (isSelected) activeHighlightColor else Color.Transparent)
+                    .padding(10.dp)
+                    ) {
+                Icon(
+                    painter = painterResource(id = item.iconId),
+                    contentDescription = item.title,
+                    tint = if (isSelected) activeTextColor else inactiveTextColor,
+                    modifier = Modifier.size(20.dp))
+            }
+        Text(
+            text = item.title,
+            color = if (isSelected) activeTextColor else inactiveTextColor)
+
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
