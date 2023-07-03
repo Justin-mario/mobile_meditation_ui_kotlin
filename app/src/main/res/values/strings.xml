@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Meditation Ui</string>
+    <string name="user_name">Gozie</string>
+    <string name="welcome_message">We wish you have a good day!</string>
+    <string name="search">Search</string>
+
 </resources>

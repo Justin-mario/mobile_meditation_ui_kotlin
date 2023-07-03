@@ -71,6 +71,7 @@ fun MeditationUiTheme(
         colorScheme = colorScheme,
         typography = Typography,
         shapes = Shapes,
-        content = content
+        content = content,
+
     )
 }

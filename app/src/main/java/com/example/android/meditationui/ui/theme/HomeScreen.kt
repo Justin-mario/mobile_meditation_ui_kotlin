@@ -66,7 +66,7 @@ fun HomeScreen() {
 }
 
 @Composable
-fun GreetingSection( modifier: Modifier = Modifier, name: String = "Gozie") {
+fun GreetingSection( modifier: Modifier = Modifier, name: String = stringResource(id = R.string.user_name)) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -82,7 +82,7 @@ fun GreetingSection( modifier: Modifier = Modifier, name: String = "Gozie") {
                 style = MaterialTheme.typography.headlineMedium
                 )
             Text(
-                text = "We wish you have a good day!",
+                text = stringResource(id = R.string.welcome_message),
                 color = TextWhite,
                 style = MaterialTheme.typography.bodyMedium
             )
@@ -90,7 +90,7 @@ fun GreetingSection( modifier: Modifier = Modifier, name: String = "Gozie") {
 
         Icon(
             painter = painterResource(id = R.drawable.ic_search),
-            contentDescription = "Search",
+            contentDescription = stringResource(id = R.string.search),
             tint = Color.White,
             modifier = Modifier.size(20.dp)
 
@@ -109,7 +109,7 @@ fun ChipSection(chips: List<String>) {
                 modifier = Modifier
                     .padding(start = 16.dp, top = 16.dp, bottom = 16.dp)
                     .clickable { selectedChips = it }
-                    .clip(RoundedCornerShape(10.dp))
+                    .clip(MaterialTheme.shapes.small)
                     .background(if (selectedChips == it) ButtonBlue else DarkerButtonBlue)
                     .padding(16.dp)) {
                 Text(text = chips[it], color = TextWhite)
@@ -125,7 +125,7 @@ fun CurrentMeditation(color: Color = LightRed) {
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .padding(16.dp)
-            .clip(RoundedCornerShape(10.dp))
+            .clip(MaterialTheme.shapes.small)
             .background(color)
             .padding(horizontal = 16.dp, vertical = 16.dp)
             .fillMaxWidth()
