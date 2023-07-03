@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -31,21 +32,22 @@ import com.example.android.meditationui.R
 import com.example.android.meditationui.data.MeditationUiObjects.chips
 
 @Composable
-fun HomeScreen(){
+fun HomeScreen() {
     Box(modifier = Modifier
         .background(DeepBlue)
         .fillMaxSize()
         ) {
-        Column() {
+        Column {
             GreetingSection()
             ChipSection(chips = chips)
+            CurrentMeditation()
         }
     }
 
 }
 
 @Composable
-fun GreetingSection( modifier: Modifier = Modifier, name: String = "Gozie"){
+fun GreetingSection( modifier: Modifier = Modifier, name: String = "Gozie") {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -78,24 +80,68 @@ fun GreetingSection( modifier: Modifier = Modifier, name: String = "Gozie"){
 }
 
 @Composable
-fun ChipSection(
-    chips: List<String>
-){
+fun ChipSection(chips: List<String>) {
     var selectedChips by remember {
         mutableStateOf(0)
     }
     LazyRow {
         items(chips.size) {
-            Box(
+            Box(contentAlignment = Alignment.Center,
                 modifier = Modifier
                     .padding(start = 16.dp, top = 16.dp, bottom = 16.dp)
                     .clickable { selectedChips = it }
                     .clip(RoundedCornerShape(10.dp))
                     .background(if (selectedChips == it) ButtonBlue else DarkerButtonBlue)
-                    .padding(16.dp)) {
+                    .padding(12.dp)) {
                 Text(text = chips[it], color = TextWhite)
             }
         }
+    }
+}
+
+@Composable
+fun CurrentMeditation(color: Color = LightRed) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .padding(16.dp)
+            .clip(RoundedCornerShape(10.dp))
+            .background(color)
+            .padding(horizontal = 16.dp, vertical = 16.dp)
+            .fillMaxWidth()
+           ) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier) {
+            Text(
+                text = "Daily Thought",
+                color = TextWhite,
+                style = MaterialTheme.typography.headlineMedium
+            )
+            Text(
+                text = "Meditation . 3-10 min",
+                color = TextWhite,
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+
+        Box(contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .clip(CircleShape)
+                .background(ButtonBlue)
+                .size(40.dp)
+                .padding(10.dp)
+            ){
+            Icon(
+                painter = painterResource(id = R.drawable.ic_play),
+                contentDescription = "Play",
+                tint = Color.White,
+                modifier = Modifier.size(16.dp)
+
+            )
+        }
+
     }
 }
 
