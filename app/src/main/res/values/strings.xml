@@ -3,5 +3,9 @@
     <string name="user_name">Gozie</string>
     <string name="welcome_message">We wish you have a good day!</string>
     <string name="search">Search</string>
+    <string name="daily_thought">Daily Thought</string>
+    <string name="meditation_time">"Meditation . 3 -10 min"</string>
+    <string name="play">Play</string>
+    <string name="features">Features</string>
 
 </resources>

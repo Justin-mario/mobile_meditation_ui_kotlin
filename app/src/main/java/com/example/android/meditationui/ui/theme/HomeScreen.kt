@@ -134,12 +134,12 @@ fun CurrentMeditation(color: Color = LightRed) {
             verticalArrangement = Arrangement.Center,
             modifier = Modifier) {
             Text(
-                text = "Daily Thought",
+                text = stringResource(id = R.string.daily_thought),
                 color = TextWhite,
                 style = MaterialTheme.typography.headlineMedium
             )
             Text(
-                text = "Meditation . 3-10 min",
+                text = stringResource(id = R.string.meditation_time),
                 color = TextWhite,
                 style = MaterialTheme.typography.bodyMedium
             )
@@ -154,7 +154,7 @@ fun CurrentMeditation(color: Color = LightRed) {
             ){
             Icon(
                 painter = painterResource(id = R.drawable.ic_play),
-                contentDescription = "Play",
+                contentDescription = stringResource(id = R.string.play),
                 tint = Color.White,
                 modifier = Modifier.size(16.dp)
 
@@ -168,7 +168,7 @@ fun CurrentMeditation(color: Color = LightRed) {
 fun FeatureSection(feature: List<Feature>) {
     Column(modifier = Modifier.fillMaxWidth()) {
             Text(
-                text = "Features",
+                text = stringResource(id = R.string.features),
                 style = MaterialTheme.typography.headlineLarge,
                 modifier = Modifier.padding(16.dp))
         LazyVerticalGrid(
@@ -188,7 +188,7 @@ fun FeatureItem(feature: Feature) {
         modifier = Modifier
             .padding(7.5.dp)
             .aspectRatio(1f)
-            .clip(RoundedCornerShape(10.dp))
+            .clip(MaterialTheme.shapes.small)
             .background(feature.darkColor)
     ) {
         val width = constraints.maxWidth
@@ -269,7 +269,7 @@ fun FeatureItem(feature: Feature) {
                     .clickable { // Handle the click
                     }
                     .align(Alignment.BottomEnd)
-                    .clip(RoundedCornerShape(10.dp))
+                    .clip(MaterialTheme.shapes.small)
                     .background(ButtonBlue)
                     .padding(vertical = 6.dp, horizontal = 16.dp)
                 )
@@ -328,7 +328,7 @@ fun BottomMenuItem(
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
-                    .clip(RoundedCornerShape(10.dp))
+                    .clip(MaterialTheme.shapes.small)
                     .background(if (isSelected) activeHighlightColor else Color.Transparent)
                     .padding(10.dp)
                     ) {
